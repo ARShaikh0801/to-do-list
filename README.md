@@ -12,6 +12,13 @@
 
 ---
 
+<div align="center">
+  <h2>✨ Checkout Live Demo</h2>
+  
+  [![Live Demo](https://img.shields.io/badge/See_Live_Demo-4F46E5?style=for-the-badge&logo=github&logoColor=white)](https://arshaikh0801.github.io/to-do-list/)
+
+</div>
+
 ## ✨ Features
 
 | Feature | Description |
@@ -123,5 +130,7 @@ This project is open source.
 **Made with ❤️ by [ARShaikh0801](https://github.com/ARShaikh0801)**
 
 ⭐ Star this repo if you found it useful!
+
+[GitHub](https://github.com/ARShaikh0801) • [LinkedIn](https://www.linkedin.com/in/shaikh-abdulrauf-asifparvez-b4485435a)
 
 </div>
