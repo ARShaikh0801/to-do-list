@@ -74,7 +74,17 @@ to-do-list/
 
 ---
 
-## 🛠️ Built With
+## � Screenshots
+
+Take a look at the sleek interface:
+
+![To-Do List Application](<project screenshot/homePage.png>)
+
+*The application featuring the task input, active tasks list, and deleted history panel*
+
+---
+
+## ��️ Built With
 
 - **HTML5** — Semantic markup with `<main>`, `<section>`, `<header>`
 - **CSS3** — Custom properties, flexbox, media queries, animations
