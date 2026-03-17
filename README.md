@@ -74,7 +74,7 @@ to-do-list/
 
 ---
 
-## � Screenshots
+## 🖼 Screenshots
 
 Take a look at the sleek interface:
 
@@ -84,7 +84,7 @@ Take a look at the sleek interface:
 
 ---
 
-## ��️ Built With
+## 🏗 Built With
 
 - **HTML5** — Semantic markup with `<main>`, `<section>`, `<header>`
 - **CSS3** — Custom properties, flexbox, media queries, animations
