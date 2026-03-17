@@ -1,36 +1,117 @@
-# To-Do List
+<div align="center">
 
-Simple to-do list web app.
+# ✅ To-Do List
 
-## Overview
-A lightweight to-do application built with HTML, CSS and JavaScript to add, complete, and remove tasks.
+### A sleek, modern task manager built with pure HTML, CSS & JavaScript
 
-## Features
-- Add, edit, and remove tasks
-- Mark tasks complete/incomplete
-- Persistent storage (localStorage) — if implemented
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-## Tech stack
-- HTML, CSS, JavaScript
+</div>
 
-## Running locally
-1. Clone the repo:
-   git clone https://github.com/ARShaikh0801/to-do-list.git
-2. Open `index.html` in your browser.
-   Or serve it with a simple server:
-   python -m http.server 8000
-   then open http://127.0.0.1:8000
+---
 
-## Usage
-- Type a task and press Enter or click Add.
-- Click a task to mark complete, or use the delete button to remove.
+## ✨ Features
 
-## Contributing
-- Improve UI/UX, add persistence or sync, write tests, or add a backend API.
+| Feature | Description |
+|---------|-------------|
+| ➕ **Add Tasks** | Quickly add tasks via button click or pressing Enter |
+| ✔️ **Complete Tasks** | Click a task to toggle its completion status |
+| 🗑️ **Delete Tasks** | Remove tasks with one click — they move to the history panel |
+| 📋 **Deleted History** | View all deleted tasks with timestamps; clear history anytime |
+| 💾 **Persistent Storage** | Tasks and history survive page reloads via `localStorage` |
+| 📱 **Fully Responsive** | Looks great on desktop, tablet, and mobile (down to 340px) |
+| 🎨 **Modern UI** | Glassmorphism cards, gradient accents, smooth animations |
+| ♿ **Accessible** | Semantic HTML, ARIA labels, focus-visible outlines |
 
-## Notes
-- If the project contains a build step or package.json, run:
-  npm install
-  npm start
+---
 
-Maintainer: ARShaikh0801
+## 🚀 Getting Started
+
+### Prerequisites
+
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+
+### Run Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/ARShaikh0801/to-do-list.git
+
+# Navigate into the project
+cd to-do-list
+
+# Open in your browser
+start Todo.html        # Windows
+open Todo.html         # macOS
+xdg-open Todo.html     # Linux
+```
+
+> **Tip:** You can also use a live server extension in VS Code for auto-reload during development.
+
+---
+
+## 📁 Project Structure
+
+```
+to-do-list/
+├── Todo.html      # Main HTML — semantic structure with accessibility
+├── styles.css     # Responsive CSS — custom properties & 6 breakpoints
+├── scripts.js     # App logic — localStorage persistence & rendering
+└── README.md      # You are here!
+```
+
+---
+
+## 🎨 Design Highlights
+
+- **Gradient background** — purple-blue linear gradient
+- **Glassmorphism cards** — frosted-glass effect with `backdrop-filter`
+- **Micro-animations** — slide-in tasks, hover lifts, shake on empty input
+- **Custom scrollbars** — styled for a polished look
+- **Inter font** — clean, modern typography via Google Fonts
+
+---
+
+## 🛠️ Built With
+
+- **HTML5** — Semantic markup with `<main>`, `<section>`, `<header>`
+- **CSS3** — Custom properties, flexbox, media queries, animations
+- **Vanilla JavaScript** — DOM manipulation, localStorage API, event handling
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how:
+
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
+3. **Commit** your changes: `git commit -m "Add amazing feature"`
+4. **Push** to the branch: `git push origin feature/amazing-feature`
+5. **Open** a Pull Request
+
+### Ideas for Contributions
+
+- 🌙 Dark mode toggle
+- 📅 Due dates & reminders
+- 🏷️ Task categories / tags
+- 🔄 Drag-and-drop reordering
+- ☁️ Cloud sync with a backend API
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+
+**Made with ❤️ by [ARShaikh0801](https://github.com/ARShaikh0801)**
+
+⭐ Star this repo if you found it useful!
+
+</div>

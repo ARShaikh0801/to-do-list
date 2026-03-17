@@ -1,80 +1,167 @@
-document.addEventListener('DOMContentLoaded', function () {
+/**
+ * To-Do List Application
+ * Features: Add, complete, delete tasks with localStorage persistence
+ * and deleted-task history tracking.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // --- DOM References ---
     const taskInput = document.getElementById('task-input');
     const addTaskBtn = document.getElementById('add-task-btn');
     const taskList = document.getElementById('task-list');
     const deletedTasksList = document.getElementById('deleted-tasks-list');
     const clearHistoryBtn = document.getElementById('clear-history-btn');
-    
-    function createTaskElement(taskText) {
-        const listItem = document.createElement('li');
-        const taskTextElement = document.createElement('span');
-        const horizontalLine = document.createElement('hr');
+    const emptyState = document.getElementById('empty-state');
+    const emptyHistory = document.getElementById('empty-history');
+    const taskCountEl = document.getElementById('task-count');
 
-        taskTextElement.textContent = taskText;
+    // --- State ---
+    let tasks = [];
+    let history = [];
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.classList.add('delete-btn');
+    // --- LocalStorage ---
+    const TASKS_KEY = 'todo_tasks';
+    const HISTORY_KEY = 'todo_history';
 
-        listItem.appendChild(taskTextElement);
-        listItem.appendChild(deleteBtn);
-
-        taskList.appendChild(listItem);
-        taskList.appendChild(horizontalLine);
-
-        deleteBtn.addEventListener('click', function () {
-            // Add to history before removing
-            addToHistory(taskText);
-            
-            // Remove from main list
-            taskList.removeChild(listItem);
-            taskList.removeChild(horizontalLine);
-        });
-
-        taskTextElement.addEventListener('click', function () {
-            taskTextElement.classList.toggle('task-completed');
-        });
+    function saveTasks() {
+        localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
     }
 
-    function addToHistory(taskText) {
-        const historyItem = document.createElement('li');
-        historyItem.classList.add('history-item');
-        
-        const taskSpan = document.createElement('span');
-        taskSpan.textContent = taskText;
-        taskSpan.classList.add('history-task');
-        
-        const timestamp = document.createElement('span');
-        timestamp.textContent = new Date().toLocaleTimeString();
-        timestamp.classList.add('timestamp');
-        
-        historyItem.appendChild(taskSpan);
-        historyItem.appendChild(timestamp);
-        
-        deletedTasksList.appendChild(historyItem);
+    function saveHistory() {
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
     }
 
-    function clearHistory() {
+    function loadData() {
+        try {
+            tasks = JSON.parse(localStorage.getItem(TASKS_KEY)) || [];
+            history = JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+        } catch {
+            tasks = [];
+            history = [];
+        }
+    }
+
+    // --- Rendering ---
+    function renderTasks() {
+        taskList.innerHTML = '';
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+
+            const span = document.createElement('span');
+            span.textContent = task.text;
+            if (task.completed) span.classList.add('task-completed');
+
+            span.addEventListener('click', () => {
+                tasks[index].completed = !tasks[index].completed;
+                saveTasks();
+                renderTasks();
+            });
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.setAttribute('aria-label', `Delete task: ${task.text}`);
+
+            deleteBtn.addEventListener('click', () => {
+                addToHistory(task.text);
+                tasks.splice(index, 1);
+                saveTasks();
+                renderTasks();
+                renderHistory();
+            });
+
+            li.appendChild(span);
+            li.appendChild(deleteBtn);
+            taskList.appendChild(li);
+        });
+
+        updateEmptyState();
+        updateTaskCount();
+    }
+
+    function renderHistory() {
         deletedTasksList.innerHTML = '';
+        history.forEach((item) => {
+            const li = document.createElement('li');
+            li.classList.add('history-item');
+
+            const taskSpan = document.createElement('span');
+            taskSpan.textContent = item.text;
+            taskSpan.classList.add('history-task');
+
+            const timestamp = document.createElement('span');
+            timestamp.textContent = item.time;
+            timestamp.classList.add('timestamp');
+
+            li.appendChild(taskSpan);
+            li.appendChild(timestamp);
+            deletedTasksList.appendChild(li);
+        });
+
+        updateEmptyHistory();
     }
 
+    // --- UI Helpers ---
+    function updateEmptyState() {
+        emptyState.classList.toggle('hidden', tasks.length > 0);
+    }
+
+    function updateEmptyHistory() {
+        emptyHistory.classList.toggle('hidden', history.length > 0);
+    }
+
+    function updateTaskCount() {
+        if (tasks.length === 0) {
+            taskCountEl.textContent = '';
+            return;
+        }
+        const completed = tasks.filter(t => t.completed).length;
+        taskCountEl.textContent = `${completed}/${tasks.length} completed`;
+    }
+
+    // --- Actions ---
     function addTask() {
-        const taskText = taskInput.value.trim();
-        if (taskText === '') {
-            alert("Please Enter A Task");
+        const text = taskInput.value.trim();
+        if (!text) {
+            taskInput.classList.add('shake');
+            taskInput.addEventListener('animationend', () => {
+                taskInput.classList.remove('shake');
+            }, { once: true });
+            taskInput.focus();
             return;
         }
 
-        createTaskElement(taskText);
+        tasks.push({ text, completed: false });
+        saveTasks();
+        renderTasks();
         taskInput.value = '';
+        taskInput.focus();
     }
 
+    function addToHistory(taskText) {
+        history.push({
+            text: taskText,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        });
+        saveHistory();
+    }
+
+    function clearHistory() {
+        history = [];
+        saveHistory();
+        renderHistory();
+    }
+
+    // --- Event Listeners ---
     addTaskBtn.addEventListener('click', addTask);
-    taskInput.addEventListener('keypress', function (event) {
-        if (event.key === 'Enter') {
-            addTask();
-        }
+
+    taskInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') addTask();
     });
-    
+
     clearHistoryBtn.addEventListener('click', clearHistory);
+
+    // --- Initialize ---
+    loadData();
+    renderTasks();
+    renderHistory();
 });
