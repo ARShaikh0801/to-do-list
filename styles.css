@@ -42,8 +42,9 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     padding: 40px 20px;
 }
 
@@ -394,6 +395,27 @@ hr {
     margin-left: 10px;
     flex-shrink: 0;
     white-space: nowrap;
+}
+
+/* --- Footer --- */
+.app-footer {
+    margin-top: auto;
+    padding-top: 40px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.app-footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition);
+}
+
+.app-footer a:hover {
+    color: var(--clr-accent);
 }
 
 /* ========================================

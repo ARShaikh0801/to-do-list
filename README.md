@@ -78,7 +78,7 @@ to-do-list/
 
 Take a look at the sleek interface:
 
-![To-Do List Application](<project screenshot/homePage.png>)
+![To-Do List Application](<project screenshot/homePageEdited.png>)
 
 *The application featuring the task input, active tasks list, and deleted history panel*
 
